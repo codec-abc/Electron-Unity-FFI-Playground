@@ -34,10 +34,12 @@ public class TextureReader : MonoBehaviour
 			tex.anisoLevel = 0;
 			tex.Apply();
 
+			TextureScale.Bilinear (tex, 28, 28);
+
 			var bytes = tex.GetRawTextureData();
 			var floats = bytes.Select (x => (float)x).ToArray();
 
-			SendRGBTexture(floats, floats.Length, RenderTexture.active.width, RenderTexture.active.height);
+			SendRGBTexture(floats, floats.Length, 28, 28);
 		}
 	}
 }
