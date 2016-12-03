@@ -1,0 +1,12 @@
+[package]
+name = "wrapper"
+version = "0.1.0"
+authors = ["codec-abc <noemail>"]
+
+[dependencies]
+image = "*"
+libc = "*"
+
+[lib]
+name = "rustwrapper"
+crate-type = ["dylib"]
