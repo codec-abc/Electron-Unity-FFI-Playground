@@ -5,7 +5,7 @@ use std::slice;
 use std::env;
 
 #[no_mangle]
-pub extern fn write_image_byte_array_to_file
+pub extern fn write_rgb_texture_byte_array_to_file
 (
     ptr: *const libc::uint8_t, 
     len : libc::size_t, 

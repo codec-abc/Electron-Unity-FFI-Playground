@@ -1,13 +1,13 @@
 var MyPlugin = {
     SendRGBTexture: function(array, size, width, height)
     {
-        var myArray  = new Array(size);
+        var texturePixelsArray  = new Array(size);
         for(var i=0;i<size;i++)
         {
             var myFloat = (HEAPF32[(array>>2)+i]);
-            myArray[i] = myFloat;
+            texturePixelsArray[i] = myFloat;
         }
-        window.bridge.saveRGBTexture(myArray, size, width, height);
+        window.bridge.HandleRGBTexture(texturePixelsArray, width, height);
     }
 };
 

@@ -6,7 +6,7 @@ var floatPtr = ref.refType(ref.types.float);
 
 var rust_wrapper = ffi.Library('rustwrapper', 
 {
-    'write_image_byte_array_to_file' : ['int', [bytePtr, 'int', 'int', 'int'] ]
+    'write_rgb_texture_byte_array_to_file' : ['int', [bytePtr, 'int', 'int', 'int'] ]
 });
 
 var cntk_wrapper = ffi.Library('CPPEvalClientDll', 
@@ -15,26 +15,21 @@ var cntk_wrapper = ffi.Library('CPPEvalClientDll',
 });
 
 window.bridge = {};
-window.bridge.saveRGBTexture = function (pixel_array, array_length, width, height)
+window.bridge.HandleRGBTexture = function (pixel_array, width, height)
 {
-    var buf = Buffer.alloc(28 * 28 * 4);
-    var buf2 = Buffer.alloc(28 * 28 * 3);
-
-    var z = 0;
-    for (var i = 0; i < width; i++)
+    var isOk = (width === height && height === 28);
+    if (!isOk)
     {
-        for (var j = height - 1; j >= 0; j--)
-        {
-            for (var k = 0; k < 3; k++)
-            {
-                var index = (i * width * 3.0 + j * 3.0) + k;
-                buf2[z] = pixel_array[index];
-                z++;
-            }
-        }
+        var msg = "The cntk custom dlls except image of width and height of 28 and the image given does not fit those requirements.";
+        alert(msg)
+        throw msg;
     }
 
+    var buf = Buffer.alloc(width * height * 4);
+    var buf2 = Buffer.alloc(width * height * 3);
     //var float_array = [];
+
+    var z = 0;
     var t = 0;
     for (var i = 0; i < width; i++)
     {
@@ -43,8 +38,10 @@ window.bridge.saveRGBTexture = function (pixel_array, array_length, width, heigh
             var average = 0;
             for (var k = 0; k < 3; k++)
             {
-                var index = (i * height * 3.0 + j * 3.0) + k;
+                var index = (i * width * 3.0 + j * 3.0) + k;
                 average += pixel_array[index];
+                buf2[z] = pixel_array[index];
+                z++;
             }
             var pixel_value = 255.0 -(average / 3.0);
             buf.writeFloatLE(pixel_value, t * 4);
@@ -52,10 +49,6 @@ window.bridge.saveRGBTexture = function (pixel_array, array_length, width, heigh
             t++;
         }
     }
-
-
-
-                
 
     var probas = Buffer.alloc(10 * 4);
     var result = cntk_wrapper.analyze_digits(buf, probas);
@@ -76,11 +69,8 @@ window.bridge.saveRGBTexture = function (pixel_array, array_length, width, heigh
         }
     }
 
-
-
     //console.log(proba_as_float);
     //rust_wrapper.write_image_byte_array_to_file(buf2, 28 *28 * 3, width, height);
-
 
     alert("most probable digit " + max_proba_digit);
 
