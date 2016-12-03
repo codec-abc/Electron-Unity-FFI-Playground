@@ -15,7 +15,7 @@ Then I use the ability that this is an Electron application to do some fun stuff
 
 The app can use a dll build using Rust to save the texture to a file. For that follow the build instructions and open the file ElectronApp\unityBridge.js and uncomment the following line
 ```js
-//rust_wrapper.write_image_byte_array_to_file(buf2, 28 *28 * 3, width, height);
+//rust_wrapper.write_rgb_texture_byte_array_to_file(buf2, width * height * 3, width, height);
 ```
 
 ## CNTK custom dll
