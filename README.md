@@ -7,6 +7,13 @@
 - cd ElectronApp
 - npm start
 
+## Rust dll to save texture as PNG
+
+The app can use a dll build using Rust to save the texture to a file. For that follow the build instructions and open the file ElectronApp\unityBridge.js and uncomment the following line
+```js
+//rust_wrapper.write_image_byte_array_to_file(buf2, 28 *28 * 3, width, height);
+```
+
 ## CNTK custom dll
 
 [If you want to build CNTK grab the CPU release here](https://github.com/Microsoft/CNTK/releases/tag/v2.0.beta5.0)
