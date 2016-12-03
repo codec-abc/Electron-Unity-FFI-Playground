@@ -70,7 +70,7 @@ window.bridge.HandleRGBTexture = function (pixel_array, width, height)
     }
 
     //console.log(proba_as_float);
-    //rust_wrapper.write_image_byte_array_to_file(buf2, 28 *28 * 3, width, height);
+    //rust_wrapper.write_rgb_texture_byte_array_to_file(buf2, width * height * 3, width, height);
 
     alert("most probable digit " + max_proba_digit);
 
