@@ -1,6 +1,6 @@
 # Electron-Unity-FFI-Playground
 
-This project is a fun little project to mix different technologies and framework. It mixes Unity, WebGL, Electron, Nodejs, Rust and Cntk. The main goal is to draw a digit in a WebGL canvas and to identify the digit using a machine learning algorithm. For that we use Unity to create a simple drawing app. [I used this project as a base to do the painting.](https://www.assetstore.unity3d.com/en/#!/content/33506)
+This project is a fun little project to mix different technologies and framework. It mixes Unity, WebGL, Electron, Nodejs, Rust and CNTK. The main goal is to draw a digit in a WebGL canvas and to identify the digit using a machine learning algorithm. For that we use Unity to create a simple drawing app. [I used this project as a base to do the painting.](https://www.assetstore.unity3d.com/en/#!/content/33506)
 
 Then I use the ability that this is an Electron application to do some fun stuff with Node. I use the `ffi` and `ref` package to get the texture content and send it to native librairies. I can either send it to a dll build with Rust that use the image crate to save it in the home folder or I can send it to a CNTK dll that try to identify the digit and send back the result to the app.
 
