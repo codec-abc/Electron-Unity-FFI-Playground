@@ -19,12 +19,11 @@ using GetEvalProc = void(*)(IEvaluateModel<ElemType>**);
 typedef std::pair<std::wstring, std::vector<float>*> MapEntry;
 typedef std::map<std::wstring, std::vector<float>*> Layer;
 
-//int main(float* image, float* result)
 int main(float* image, float* result)
 {
-	int ret;
-	IEvaluateModel<float> *model;
-	const std::string modelFilePath = "02_OneConv";
+    int ret;
+    IEvaluateModel<float> *model;
+    const std::string modelFilePath = "02_OneConv";
 
     try
     {
@@ -55,19 +54,12 @@ int main(float* image, float* result)
         // Generate dummy input values in the appropriate structure and size
         auto inputLayerName = inDims.begin()->first;
         std::vector<float> inputs;
-		//fprintf(stderr, "layer dimension '%d' output:\n", inDims[inputLayerName]);
-        //for (int i = 0; i < inDims[inputLayerName]; i++)
-        //{
-        //    inputs.push_back(static_cast<float>(i % 255));
-        //}
 
-		
-		for (int i = 0; i < inDims[inputLayerName]; i++)
-		{
-			//printf("pushing %f \r\n", image[i]);
-		    inputs.push_back(image[i]);
-			//inputs.push_back(0.0f);
-		}
+        
+        for (int i = 0; i < inDims[inputLayerName]; i++)
+        {
+            inputs.push_back(image[i]);
+        }
 
         // Allocate the output values layer
         std::vector<float> outputs;
@@ -83,20 +75,13 @@ int main(float* image, float* result)
         model->Evaluate(inputLayer, outputLayer);
 
         // Output the results
-        //fprintf(stderr, "Layer '%ls' output:\n", outputLayerName.c_str());
-		int index = 0;
+        int index = 0;
         for (auto& value : outputs)
         {
-			result[index] = value;
-            //fprintf(stderr, "%f\n", value);
-			index++;
-			//printf("f is %f in hex %x \r\n", f, *(unsigned int*)&f);
+            result[index] = value;
+            index++;
         }
 
-
-
-        // This pattern is used by End2EndTests to check whether the program runs to complete.
-        //fprintf(stderr, "Evaluation complete.\n");
         ret = 0;
     }
     catch (const std::exception& err)
@@ -116,5 +101,5 @@ int main(float* image, float* result)
 
 extern "C" __declspec(dllexport) int __cdecl analyze_digits(float* image, float* result)
 {
-	return main(image, result);
+    return main(image, result);
 }
