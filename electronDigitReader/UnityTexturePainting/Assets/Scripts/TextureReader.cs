@@ -8,17 +8,8 @@ public class TextureReader : MonoBehaviour
 	[SerializeField]
 	private RenderTexture RenderTexture = null;
 
-//	[DllImport("__Internal")]
-//	private static extern void Hello();
-//
-//	[DllImport("__Internal")]
-//	private static extern void HelloString(string str);
-//
-//	[DllImport("__Internal")]
-//	private static extern void PrintFloatArray(float[] array, int size);
-
 	[DllImport("__Internal")]
-	private static extern void GetSomeFloatArray(float[] array, int size, int width, int height);
+	private static extern void SendRGBTexture(float[] array, int size, int width, int height);
 
 
 	// Use this for initialization
@@ -46,15 +37,7 @@ public class TextureReader : MonoBehaviour
 			var bytes = tex.GetRawTextureData();
 			var floats = bytes.Select (x => (float)x).ToArray();
 
-//			HelloString ("salut");
-			GetSomeFloatArray (floats, floats.Length, RenderTexture.active.width, RenderTexture.active.height);
-
-
-
- //	        const string Path = @"C:\Users\codec\Desktop";
-//			var bytes2 = tex.EncodeToPNG();
-//			System.IO.File.WriteAllBytes(System.IO.Path.Combine(Path, "myTexture.png"), bytes2);
-//			System.IO.File.WriteAllBytes(System.IO.Path.Combine(Path, "lol.png"), bytes);
+			SendRGBTexture(floats, floats.Length, RenderTexture.active.width, RenderTexture.active.height);
 		}
 	}
 }

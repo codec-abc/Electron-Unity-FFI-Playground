@@ -2,6 +2,7 @@ extern crate image;
 extern crate libc;
 
 use std::slice;
+use std::env;
 
 #[no_mangle]
 pub extern fn write_image_byte_array_to_file
@@ -17,15 +18,27 @@ pub extern fn write_image_byte_array_to_file
         slice::from_raw_parts(ptr, len)
     };
 
-    let result = image::save_buffer(
-        "C:\\Users\\codec\\Desktop\\test2.png",
-        &slice,
-        width,
-        height,
-        image::ColorType::RGB(8)
-    );
-    match result {
-        Ok(_) => 1,
-        Err(_) => 0
+    match env::home_dir() 
+    {
+        Some(mut path) => 
+        {
+            path.push("renderTexture");
+            path.set_extension("png");
+
+            let result = image::save_buffer(
+                path,
+                &slice,
+                width,
+                height,
+                image::ColorType::RGB(8)
+            );
+
+            match result 
+            {
+                Ok(_) => 1,
+                Err(_) => 0
+            }
+        },
+        None => 0,
     }
 }

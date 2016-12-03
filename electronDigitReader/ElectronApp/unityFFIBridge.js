@@ -9,7 +9,7 @@ var rust_wrapper = ffi.Library('rustwrapper',
 });
 
 window.bridge = {};
-window.bridge.saveTexture = function (pixel_array, array_length, width, height)
+window.bridge.saveRGBTexture = function (pixel_array, array_length, width, height)
 {
     var buf = Buffer.alloc(array_length);
     var t = 0;
@@ -25,5 +25,6 @@ window.bridge.saveTexture = function (pixel_array, array_length, width, height)
             }
         }
     }
-    rust_wrapper.write_image_byte_array_to_file(buf, array_length, width, height);
+    var result = rust_wrapper.write_image_byte_array_to_file(buf, array_length, width, height);
+    console.log("Result is " + result);
 };
