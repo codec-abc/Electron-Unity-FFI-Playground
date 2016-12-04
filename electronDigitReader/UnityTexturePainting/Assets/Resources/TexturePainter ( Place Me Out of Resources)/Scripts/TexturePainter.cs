@@ -20,7 +20,7 @@ public class TexturePainter : MonoBehaviour {
 	Painter_BrushMode mode; //Our painter mode (Paint brushes or decals)
 	float brushSize=1.0f; //The size of our brush
 	Color brushColor; //The selected color
-	int brushCounter=0,MAX_BRUSH_COUNT=1000; //To avoid having millions of brushes
+	int brushCounter=0,MAX_BRUSH_COUNT=10000; //To avoid having millions of brushes
 	bool saving=false; //Flag to check if we are saving the texture
 
 	
@@ -54,10 +54,13 @@ public class TexturePainter : MonoBehaviour {
 		}
 		brushCounter++; //Add to the max brushes
 		if (brushCounter >= MAX_BRUSH_COUNT) { //If we reach the max brushes available, flatten the texture and clear the brushes
-			brushCursor.SetActive (false);
-			saving=true;
-			Invoke("SaveTexture",0.1f);
-			
+//			brushCursor.SetActive (false);
+//			saving=true;
+//			Invoke("SaveTexture",0.1f);
+			foreach (Transform child in brushContainer.transform) {//Clear brushes
+				Destroy(child.gameObject);
+			}
+//			
 		}
 	}
 	//To update at realtime the painting cursor on the mesh
@@ -91,7 +94,7 @@ public class TexturePainter : MonoBehaviour {
 		
 	}
 	//Sets the base material with a our canvas texture, then removes all our brushes
-	void SaveTexture(){		
+	public void SaveTexture(){		
 		brushCounter=0;
 		//System.DateTime date = System.DateTime.Now;
 		RenderTexture.active = canvasTexture;

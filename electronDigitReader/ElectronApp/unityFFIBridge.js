@@ -35,15 +35,15 @@ window.bridge.HandleRGBTexture = function (pixel_array, width, height)
     {
         for (var j = height - 1; j >= 0; j--)
         {
-            var average = 0;
+            var sum = 0;
             for (var k = 0; k < 3; k++)
             {
-                var index = (i * width * 3.0 + j * 3.0) + k;
-                average += pixel_array[index];
+                var index = (i * width * 3 + j * 3) + k;
+                sum += pixel_array[index];
                 buf2[z] = pixel_array[index];
                 z++;
             }
-            var pixel_value = 255.0 -(average / 3.0);
+            var pixel_value = 255.0 -(sum / 3.0);
             buf.writeFloatLE(pixel_value, t * 4);
             //float_array.push(pixel_value);
             t++;
@@ -69,8 +69,7 @@ window.bridge.HandleRGBTexture = function (pixel_array, width, height)
         }
     }
 
-    //console.log(proba_as_float);
-    //rust_wrapper.write_rgb_texture_byte_array_to_file(buf2, width * height * 3, width, height);
+    rust_wrapper.write_rgb_texture_byte_array_to_file(buf2, width * height * 3, width, height);
 
     alert("most probable digit " + max_proba_digit);
 

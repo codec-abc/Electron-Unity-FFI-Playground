@@ -87,12 +87,12 @@ int main(float* image, float* result)
     catch (const std::exception& err)
     {
         fprintf(stderr, "Evaluation failed. EXCEPTION occurred: %s\n", err.what());
-        ret = 1;
+        ret = 2;
     }
     catch (...)
     {
         fprintf(stderr, "Evaluation failed. Unknown ERROR occurred.\n");
-        ret = 1;
+        ret = 3;
     }
 
     fflush(stderr);
