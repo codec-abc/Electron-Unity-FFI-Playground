@@ -9,7 +9,7 @@ Then I use the ability that this is an Electron application to do some fun stuff
 - Build the unity project for WebGL and place the output in the ElectronApp directory
 - Build the Rust wrapper dll and place it in the ElectronApp directory
 - cd ElectronApp
-- npm start
+- npm start (You may want to use [Electron-Rebuild](https://github.com/electron/electron-rebuild) so the dlls are loaded correctly in the Electron App)
 
 ## Save texture as PNG
 
