@@ -23,7 +23,7 @@ int main(float* image, float* result)
 {
     int ret;
     IEvaluateModel<float> *model;
-    const std::string modelFilePath = "02_OneConv";
+    const std::string modelFilePath = "ConvNet_MNIST";
 
     try
     {

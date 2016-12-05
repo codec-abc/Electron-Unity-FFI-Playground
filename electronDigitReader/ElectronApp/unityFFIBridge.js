@@ -85,8 +85,8 @@ window.bridge.HandleRGBTexture = function (pixel_array, width, height)
         stat.push(obj);
     }
 
-    console.log(float_array_as_string);
-    console.log(stat);
+    //console.log(float_array_as_string);
+    //console.log(stat);
     
     alert("most probable digit " + max_proba_digit);
 
