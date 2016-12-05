@@ -19,7 +19,8 @@ public class TextureCleaner : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	
+		this.frameCount = 30;
+		this.BlankReset.gameObject.transform.position = new Vector3 (77.1f, 0, 32.5f);
 	}
 	
 	// Update is called once per frame
