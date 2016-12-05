@@ -29,7 +29,6 @@ window.bridge.HandleRGBTexture = function (pixel_array, width, height)
     var byte_array_to_save_texture_with_rust_dll = Buffer.alloc(width * height * 3);
     var float_array = [];
 
-
     var float_array_as_string = "";
     var rgb_texture_byte_index = 0;
     var mono_texture_float_index = 0;
@@ -47,11 +46,6 @@ window.bridge.HandleRGBTexture = function (pixel_array, width, height)
                 rgb_texture_byte_index++;
             }
             var pixel_value = 255.0 - (sum / 3.0);
-            pixel_value = pixel_value * 3.0;
-            if (pixel_value > 255.0)
-            {
-                pixel_value = 255.0;
-            }
             float_array_to_send_texture_to_cntk.writeFloatLE(pixel_value, mono_texture_float_index * 4);
             float_array.push(float_array_to_send_texture_to_cntk.readFloatLE(mono_texture_float_index * 4));
             current_texture_line_as_float += float_array[mono_texture_float_index] + " " ;

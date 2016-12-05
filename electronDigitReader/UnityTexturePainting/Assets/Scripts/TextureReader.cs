@@ -76,11 +76,11 @@ public class TextureReader : MonoBehaviour
 					var beginningLine = i * 28;
 					var newIndex = beginningLine + 27 - j;
 					floats_[newIndex] = floats[i * 28 + j];
-					floats_[newIndex] = floats_[newIndex] * 2;
-					if (floats_[newIndex] > 255.0f)
-					{
-						floats_[newIndex] = 255.0f;
-					}
+//					floats_[newIndex] = floats_[newIndex] * 2;
+//					if (floats_[newIndex] > 255.0f)
+//					{
+//						floats_[newIndex] = 255.0f;
+//					}
 				}
 			}
 
